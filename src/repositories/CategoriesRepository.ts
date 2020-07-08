@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
 
-import Transaction from '../models/Transaction';
+import Category from '../models/Category';
 
 interface Balance {
   income: number;
@@ -8,11 +8,11 @@ interface Balance {
   total: number;
 }
 
-@EntityRepository(Transaction)
-class TransactionsRepository extends Repository<Transaction> {
+@EntityRepository(Category)
+class CategoriesRepository extends Repository<Category> {
   public async getBalance(): Promise<void> {
     // TODO
   }
 }
 
-export default TransactionsRepository;
+export default CategoriesRepository;
