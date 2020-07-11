@@ -14,8 +14,17 @@ interface Request {
   category: string,
 }
 
+interface Response {
+  id: string,
+  title: string,
+  value: number,
+  type: 'income' | 'outcome',
+  category: string,
+
+}
+
 class CreateTransactionService {
-  public async execute({ title, value, type, category }: Request): Promise<Transaction> {
+  public async execute({ title, value, type, category }: Request): Promise<Response> {
 
     const transactionsRepository = getCustomRepository(TransactionsRepository);
 
@@ -25,7 +34,7 @@ class CreateTransactionService {
 
     await transactionsRepository.save(transaction);
 
-    return transaction;
+    return {id: transaction.id, title: transaction.title, value: transaction.value, type: transaction.type, category: transaction.category.title};
 
   }
 
