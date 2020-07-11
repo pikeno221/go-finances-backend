@@ -23,6 +23,8 @@ class CreateTransactionService {
 
     const transaction = transactionsRepository.create({ title, value, type, category: categoryDB})
 
+    console.log('transaction -> ', transaction);
+
     return transaction;
   }
 
