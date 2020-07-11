@@ -1,6 +1,6 @@
 // import AppError from '../errors/AppError';
 
-import { getCustomRepository } from 'typeorm';
+import { getCustomRepository, TransactionRepository } from 'typeorm';
 
 import Transaction from '../models/Transaction';
 import TransactionsRepository from '../repositories/TransactionsRepository';
@@ -23,9 +23,10 @@ class CreateTransactionService {
 
     const transaction = transactionsRepository.create({ title, value, type, category: categoryDB})
 
-    console.log('transaction -> ', transaction);
+    await transactionsRepository.save(transaction);
 
     return transaction;
+
   }
 
   private async findOrAdd(categoryName: string): Promise<Category> {
