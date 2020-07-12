@@ -13,11 +13,11 @@ let connection: Connection;
 describe('Transaction', () => {
   beforeAll(async () => {
     connection = await createConnection('test-connection');
-    
+
     await connection.query('DROP TABLE IF EXISTS transactions');
     await connection.query('DROP TABLE IF EXISTS categories');
     await connection.query('DROP TABLE IF EXISTS migrations');
-    
+
     await connection.runMigrations();
   });
 
@@ -173,8 +173,7 @@ describe('Transaction', () => {
     expect(response.status).toBe(400);
     expect(response.body).toMatchObject(
       expect.objectContaining({
-        status: 'error',
-        message: expect.any(String),
+        error: expect.any(String)
       }),
     );
   });

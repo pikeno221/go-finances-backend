@@ -6,6 +6,7 @@ import Transaction from '../models/Transaction';
 import TransactionsRepository from '../repositories/TransactionsRepository';
 import CategoriesRepository from '../repositories/CategoriesRepository';
 import Category from '../models/Category';
+import AppError from '../errors/AppError';
 
 interface Request {
   title: string,
@@ -37,7 +38,7 @@ class CreateTransactionService {
     const totalBalance = await transactionsRepository.getBalance();
 
 
-    if (type == 'outcome' && value > totalBalance.balance.total) throw Error('The value that you are trying to get is biggest than your balance. ');
+    if (type == 'outcome' && value > totalBalance.balance.total) throw new AppError('The value that you are trying to get is biggest than your balance. ', 400);
 
 
     const categoryDB = await this.findOrAdd(category);
